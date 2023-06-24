@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_profileFragment2"
-            app:destination="@id/profileFragment2" />
+            app:destination="@id/profileFragment2"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_home" />
     </fragment>
 
     <fragment
@@ -29,6 +31,6 @@
     <fragment
         android:id="@+id/profileFragment2"
         android:name="com.example.attendee.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="プロフィール編集"
         tools:layout="@layout/fragment_profile" />
 </navigation>
