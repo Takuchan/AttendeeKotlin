@@ -45,7 +45,10 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.imageButton.setOnClickListener{
+        binding.button.setOnClickListener{
+
+        }
+        binding.button3.setOnClickListener{
             if (allPermissionsGranted()) {
                 // DialogFragmentのインスタンスを作成
                 val newFragment = CameraDialogFragment()
@@ -57,7 +60,7 @@ class HomeFragment : Fragment() {
 
             cameraExecutor = Executors.newSingleThreadExecutor()
         }
-        binding.button4.setOnClickListener{
+        binding.button2.setOnClickListener{
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
         homeViewModel.text.observe(viewLifecycleOwner) {

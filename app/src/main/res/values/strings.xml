@@ -13,7 +13,9 @@
     <string name="welcome_text">ようこそ、Attendeeへ！</string>
     <string name="willyousharemyqpp">If you like this app, share it!</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">33</string>
+    <string name="button_scan_qrcode">QRコードをスキャン</string>
+    <string name="text_scan_qrcode">QRコードをスキャンしてください</string>
     <string name="qr_code_attention">イベント参加QRコードをカメラの中心に写してください。</string>
     <string name="togarallyButtonText">ギャラリーからQRを参照</string>
     <string name="profile_helperText">以下の設定はQRを読み取ったときのホストの参加名簿に記録されます。</string>
