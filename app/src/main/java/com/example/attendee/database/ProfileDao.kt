@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface ProfileDao {
@@ -17,8 +18,10 @@ interface ProfileDao {
 //            "last_name LIKE :last LIMIT 1")
 //    fun findByName(first: String, last: String): ProfileEntity
 
+    @Update
+    fun updateAll(profileEntity: ProfileEntity)
     @Insert
-    fun insertAll(vararg profileEntity: ProfileEntity)
+    fun insertAll(profileEntity: ProfileEntity)
 
     @Delete
     fun delete(profileEntity: ProfileEntity)

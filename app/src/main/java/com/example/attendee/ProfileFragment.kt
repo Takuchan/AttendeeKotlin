@@ -1,10 +1,12 @@
 package com.example.attendee
 
 import android.os.Bundle
+import android.provider.ContactsContract.Profile
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
@@ -13,6 +15,7 @@ import com.example.attendee.database.ProfileDao
 import com.example.attendee.database.ProfileEntity
 import com.example.attendee.databinding.FragmentProfileBinding
 import com.example.attendee.ui.home.HomeViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -29,10 +32,11 @@ class ProfileFragment : Fragment(), ValidationTools {
 
     var isEmptyDatabase: Boolean = true
     var fullname: String = ""
-    var affliation:String =""
-    var assignment:String =""
-    var telnumber:String =""
+    var affliation: String = ""
+    var assignment: String = ""
+    var telnumber: String = ""
 
+    lateinit var dataList: List<ProfileEntity>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,54 +50,57 @@ class ProfileFragment : Fragment(), ValidationTools {
         val root: View = binding.root
 
         binding.saveProfileButton.setOnClickListener {
-            if(!isEmptyEditText(binding.fullnameinput)){
+            if (!isEmptyEditText(binding.fullnameinput)) {
 
                 fullname = changeEditTextToString(binding.fullnameinput)
                 affliation = changeEditTextToString(binding.affiliationinput)
                 assignment = changeEditTextToString(binding.assignmentinput)
                 telnumber = changeEditTextToString(binding.telnumberinput)
-                    val executor = Executors.newSingleThreadExecutor()
-                    executor.execute(Runnable {
-                        val db = Room.databaseBuilder(
-                            requireContext(),
-                            AttendeeDatabase::class.java, "ATTENDEE"
-                        ).build()
-                        var profileDao:ProfileDao = db.userDao()
+                val executor = Executors.newSingleThreadExecutor()
+                executor.execute(Runnable {
+                    val database = AttendeeDatabase.getInstance(requireContext())
+                    var profileDao: ProfileDao = database.userDao()
 
-                        if(!isEmptyDatabase){
-                            val date:Date = Date()
-                            val sdf = SimpleDateFormat("yyyymmdd")
-                            val nowdate = sdf.format(date)
-                            val profileEntity : ProfileEntity = ProfileEntity(0,fullname,affliation,assignment,telnumber,nowdate)
-                            profileDao.insertAll(profileEntity)
-                        }
-                    })
+                    val date: Date = Date()
+                    val sdf = SimpleDateFormat("yyyymmdd")
+                    val nowdate = sdf.format(date)
+                    val profileEntity =
+                        ProfileEntity(0, fullname, affliation, assignment, telnumber, nowdate)
+                    if(isEmptyDatabase){
+                        profileDao.insertAll(profileEntity)
+                    }else{
+                        Toast.makeText(context , "トーストメッセージ", Toast.LENGTH_LONG).show();
+                        profileDao.updateAll(profileEntity)
+                    }
+
+                })
 
             }
         }
         return root
     }
 
-    fun loadDB(){
-        GlobalScope.launch(Dispatchers.Main) {
-            // まっさらに
-            // UIスレッドでは実行できないためコルーチン
-            val list = withContext(Dispatchers.IO) {
-                // データベース用意
-                val database = AttendeeDatabase.getInstance(this@ProfileFragment.requireContext())
-                val dao = database.userDao()
-                dao.getAll()
-            }
-            if (list.isEmpty()){
-                isEmptyDatabase = true
-            }else{
-                binding.fullnameinput.setText(list[0].name)
-                binding.affiliationinput.setText(list[0].affiliation)
-                binding.assignmentinput.setText(list[0].assignment)
-                binding.telnumberinput.setText(list[0].telnumber)
-                isEmptyDatabase = false
+    fun loadDB() {
+        val database = AttendeeDatabase.getInstance(requireContext())
+        val userDao = database.userDao()
+
+        GlobalScope.launch(Dispatchers.IO) {
+            dataList = userDao.getAll()
+
+
+            withContext(Dispatchers.Main) {
+                if (dataList.isEmpty()) {
+                    isEmptyDatabase = true
+                } else {
+                    binding.fullnameinput.setText(dataList[0].name)
+                    binding.affiliationinput.setText(dataList[0].affiliation)
+                    binding.assignmentinput.setText(dataList[0].assignment)
+                    binding.telnumberinput.setText(dataList[0].telnumber)
+                    isEmptyDatabase = false
+                }
             }
         }
+
     }
 
 
