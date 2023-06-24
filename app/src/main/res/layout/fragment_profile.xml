@@ -43,7 +43,7 @@
                     app:helperText="(必須）">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textinput1"
+                        android:id="@+id/fullnameinput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="フルネーム"
@@ -60,7 +60,7 @@
                     app:helperText="(任意）〇〇大学、〇〇会社">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textinput2"
+                        android:id="@+id/affiliationinput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="所属"
@@ -78,7 +78,7 @@
                     app:helperText="(任意）〇〇学部、〇〇課">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textinput3"
+                        android:id="@+id/assignmentinput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="役職"
@@ -97,7 +97,7 @@
                     app:helperText="(任意）ハイフン(-)なし">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textinput4"
+                        android:id="@+id/telnumberinput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="電話番号"
@@ -115,7 +115,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/saveProfileButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

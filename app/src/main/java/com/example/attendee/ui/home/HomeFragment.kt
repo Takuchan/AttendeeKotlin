@@ -23,6 +23,8 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.attendee.CameraDialogFragment
 import com.example.attendee.R
 import java.util.concurrent.Executors
@@ -48,7 +50,8 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         binding.button.setOnClickListener{
-            root.findNavController().navigate(R.id.profileFragment2)
+            findNavController().navigate(R.id.profileFragment2)
+
         }
         binding.button3.setOnClickListener{
             if (allPermissionsGranted()) {
