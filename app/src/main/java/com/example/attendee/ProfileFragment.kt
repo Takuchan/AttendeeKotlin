@@ -36,7 +36,7 @@ class ProfileFragment : Fragment(), ValidationTools {
     var assignment: String = ""
     var telnumber: String = ""
 
-    lateinit var dataList: List<ProfileEntity>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,19 +60,17 @@ class ProfileFragment : Fragment(), ValidationTools {
                 executor.execute(Runnable {
                     val database = AttendeeDatabase.getInstance(requireContext())
                     var profileDao: ProfileDao = database.userDao()
-
-                    val date: Date = Date()
                     val sdf = SimpleDateFormat("yyyymmdd")
+                    val date = Date()
                     val nowdate = sdf.format(date)
                     val profileEntity =
-                        ProfileEntity(0, fullname, affliation, assignment, telnumber, nowdate)
+                        ProfileEntity(1, fullname, affliation, assignment, telnumber, nowdate)
                     if(isEmptyDatabase){
                         profileDao.insertAll(profileEntity)
+                        isEmptyDatabase = false
                     }else{
-                        Toast.makeText(context , "トーストメッセージ", Toast.LENGTH_LONG).show();
                         profileDao.updateAll(profileEntity)
                     }
-
                 })
 
             }
@@ -85,22 +83,17 @@ class ProfileFragment : Fragment(), ValidationTools {
         val userDao = database.userDao()
 
         GlobalScope.launch(Dispatchers.IO) {
-            dataList = userDao.getAll()
-
-
+            val myProfile = userDao.getMyProfile()
             withContext(Dispatchers.Main) {
-                if (dataList.isEmpty()) {
-                    isEmptyDatabase = true
-                } else {
-                    binding.fullnameinput.setText(dataList[0].name)
-                    binding.affiliationinput.setText(dataList[0].affiliation)
-                    binding.assignmentinput.setText(dataList[0].assignment)
-                    binding.telnumberinput.setText(dataList[0].telnumber)
-                    isEmptyDatabase = false
-                }
+                binding.fullnameinput.setText(myProfile?.name ?: "")
+                binding.affiliationinput.setText(myProfile?.affiliation ?: "")
+                binding.assignmentinput.setText(myProfile?.assignment ?: "")
+                binding.telnumberinput.setText(myProfile?.telnumber ?: "")
+                binding.finalEditDate.setText("最終更新日" + myProfile?.date ?: "")
             }
+            isEmptyDatabase = myProfile == null
+            println(isEmptyDatabase)
         }
-
     }
 
 

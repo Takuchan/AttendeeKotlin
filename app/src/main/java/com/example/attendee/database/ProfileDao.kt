@@ -11,6 +11,9 @@ interface ProfileDao {
     @Query("SELECT * FROM profileentity")
     fun getAll(): List<ProfileEntity>
 
+    @Query("SELECT * FROM profileentity WHERE id = 1;")
+    fun getMyProfile(): ProfileEntity
+
 //    @Query("SELECT * FROM user WHERE uid IN (:userIds)")
 //    fun loadAllByIds(userIds: IntArray): List<ProfileEntity>
 //
@@ -20,6 +23,8 @@ interface ProfileDao {
 
     @Update
     fun updateAll(profileEntity: ProfileEntity)
+
+
     @Insert
     fun insertAll(profileEntity: ProfileEntity)
 

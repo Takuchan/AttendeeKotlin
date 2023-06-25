@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 @Entity
 data class ProfileEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
-    @ColumnInfo(name = "name") val name: String?,
-    @ColumnInfo(name = "affiliation") val affiliation:String?,
-    @ColumnInfo(name = "assignment") val assignment: String?,
-    @ColumnInfo(name = "telnumber") val telnumber:String?,
-    @ColumnInfo(name="date") val date:String
+    @ColumnInfo(name = "name") var name: String?,
+    @ColumnInfo(name = "affiliation") var affiliation:String?,
+    @ColumnInfo(name = "assignment") var assignment: String?,
+    @ColumnInfo(name = "telnumber") var telnumber:String?,
+    @ColumnInfo(name="date") var date:String
 )
