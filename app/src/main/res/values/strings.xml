@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">AttendeeKotlin</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+
+    <string name="editProfileButton">プロフィールの編集</string>
+    <string name="fullname_text">フルネーム</string>
+    <string name="affiliation">所属（〇〇大学、〇〇会社）</string>
+    <string name="save_text">save</string>
+    <string name="register_attendee_list">登録済み出席一覧</string>
+    <string name="welcome_text">ようこそ、Attendeeへ！</string>
+    <string name="willyousharemyqpp">If you like this app, share it!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="qr_code_attention">イベント参加QRコードをカメラの中心に写してください。</string>
+    <string name="togarallyButtonText">ギャラリーからQRを参照</string>
+    <string name="profile_helperText">以下の設定はQRを読み取ったときのホストの参加名簿に記録されます。</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="text_selectday">曜日を指定してください</string>
+    <string name="text_important_create_attendee">QR読み取り相手に表示する必須項目</string>
+    <string name="text_notimportant_create_attendee">自分用メモ</string>
+    <string name="text_please_check_policy">利用規約を必ずお読みください</string>
+</resources>
