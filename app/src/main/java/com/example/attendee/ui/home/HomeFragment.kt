@@ -20,13 +20,18 @@ import android.graphics.Camera
 import android.os.Build
 
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.example.attendee.AttendeeApplication
 import com.example.attendee.CameraDialogFragment
 import com.example.attendee.R
+import com.example.attendee.viewmodel.ProfileViewModel
+import com.example.attendee.viewmodel.ProfileViewModelFactory
 import java.util.concurrent.Executors
 
 class HomeFragment : Fragment() {
@@ -38,13 +43,16 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var cameraExecutor: ExecutorService
 
+    private val profileViewModel: ProfileViewModel by viewModels {
+        ProfileViewModelFactory((activity as AttendeeApplication).repository)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+//        val homeViewModel =
+//            ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -68,8 +76,7 @@ class HomeFragment : Fragment() {
         binding.button2.setOnClickListener{
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
-        homeViewModel.text.observe(viewLifecycleOwner) {
-        }
+
         return root
     }
 
@@ -87,7 +94,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
             requireContext(), it) == PackageManager.PERMISSION_GRANTED
@@ -104,6 +110,4 @@ class HomeFragment : Fragment() {
                 }
             }.toTypedArray()
     }
-
-
 }
