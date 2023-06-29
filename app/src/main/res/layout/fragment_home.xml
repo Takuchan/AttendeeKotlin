@@ -47,13 +47,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:paddingBottom="3dp"
                     android:text="details" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="@string/editProfileButton"
                 android:textSize="8sp" />
 
@@ -91,7 +92,8 @@
                 android:layout_marginRight="12dp"
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
-                android:text="@string/text_scan_qrcode" />
+                android:text="@string/text_scan_qrcode"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -99,7 +101,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="32dp"
                 android:layout_weight="1"
-                android:padding="32dp"
+                android:padding="64dp"
                 app:srcCompat="@drawable/baseline_qr_code_scanner_24" />
 
             <Button
@@ -107,10 +109,10 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="24dp"
                 android:text="@string/togarallyButtonText"
-                app:cardElevation="12dp"
-                android:textColor="@color/purple_500" />
+                android:textColor="@color/purple_500"
+                app:cardElevation="12dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

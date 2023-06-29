@@ -62,7 +62,7 @@ class ProfileFragment : Fragment(), ValidationTools {
             }
         }
 
-        profileViewModel.myProfile.observe(requireActivity(), Observer {
+        profileViewModel.myProfile.observe(viewLifecycleOwner, Observer {
             if (it == null) isEmptyDatabase = true
             binding.fullnameinput.setText(it?.name ?: "")
             binding.affiliationinput.setText(it?.affiliation ?: "")

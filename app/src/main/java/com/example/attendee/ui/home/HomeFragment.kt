@@ -24,6 +24,8 @@ import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -44,7 +46,7 @@ class HomeFragment : Fragment() {
     private lateinit var cameraExecutor: ExecutorService
 
     private val profileViewModel: ProfileViewModel by viewModels {
-        ProfileViewModelFactory((activity as AttendeeApplication).repository)
+        ProfileViewModelFactory((requireActivity().applicationContext as AttendeeApplication).repository)
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,7 +60,8 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         binding.button.setOnClickListener{
-            findNavController().navigate(R.id.profileFragment2)
+//            root.findNavController().navigate(R.id.profileFragment2)
+            findNavController().navigate(R.id.action_navigation_home_to_profileFragment2)
 
         }
         binding.button3.setOnClickListener{
@@ -76,6 +79,11 @@ class HomeFragment : Fragment() {
         binding.button2.setOnClickListener{
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
+        profileViewModel.myProfile.observe(viewLifecycleOwner, Observer {
+            binding.textView.text = it?.name ?: "ようこそ!Attendeeへ"
+            binding.textView2.text =
+                (it?.affiliation ?: "プロフィールを設定してください") + (" / "+it?.assignment) ?: ""
+        })
 
         return root
     }
