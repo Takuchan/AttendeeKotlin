@@ -2,11 +2,16 @@ package com.example.attendee.ui.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.attendee.CreateNewAttendeeDialogFragment
+import com.example.attendee.R
 import com.example.attendee.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -27,13 +32,13 @@ class DashboardFragment : Fragment() {
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        binding.createNewAttendeeSheet.setOnClickListener{
+            val createattendeedialog = CreateNewAttendeeDialogFragment()
+            createattendeedialog.show((requireActivity()).supportFragmentManager,"")
         }
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

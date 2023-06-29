@@ -30,6 +30,13 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.navigation_dashboard) {
+                supportActionBar?.subtitle = "いままでに参加した会議一覧です。"
+            } else {
+                supportActionBar?.subtitle = null
+            }
+        }
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

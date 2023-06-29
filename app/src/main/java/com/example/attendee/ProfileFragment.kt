@@ -8,6 +8,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.attendee.database.ProfileEntity
 import com.example.attendee.databinding.FragmentProfileBinding
 import com.example.attendee.viewmodel.ProfileViewModel
@@ -48,7 +49,7 @@ class ProfileFragment : Fragment(), ValidationTools {
                 affliation = changeEditTextToString(binding.affiliationinput)
                 assignment = changeEditTextToString(binding.assignmentinput)
                 telnumber = changeEditTextToString(binding.telnumberinput)
-                val sdf = SimpleDateFormat("yyyy/mm/dd HH:mm:ss")
+                val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
                 val date = Date()
                 val nowdate = sdf.format(date)
                 val profileEntity =
@@ -72,6 +73,7 @@ class ProfileFragment : Fragment(), ValidationTools {
         })
         return root
     }
+
 
 //
 
