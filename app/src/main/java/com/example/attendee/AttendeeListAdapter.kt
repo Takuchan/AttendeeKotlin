@@ -4,10 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attendee.database.AttendeeEntity
+import com.example.attendee.ui.dashboard.DashboardFragment
 
 class AttendeeListAdapter : ListAdapter<AttendeeEntity, AttendeeListAdapter.WordViewHolder>(AttendeeComperator()) {
 
@@ -19,6 +24,9 @@ class AttendeeListAdapter : ListAdapter<AttendeeEntity, AttendeeListAdapter.Word
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current.title,current.location,current.date)
+        holder.itemView.setOnClickListener{
+            holder.itemView.findNavController().navigate(R.id.action_navigation_dashboard_to_attendeeItemShowFragment)
+        }
     }
 
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,6 +43,7 @@ class AttendeeListAdapter : ListAdapter<AttendeeEntity, AttendeeListAdapter.Word
             fun create(parent: ViewGroup): WordViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.recyclerview_attendee_item, parent, false)
+
                 return WordViewHolder(view)
             }
         }

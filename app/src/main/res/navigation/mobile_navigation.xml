@@ -25,7 +25,15 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.attendee.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_attendeeItemShowFragment"
+            app:destination="@id/attendeeItemShowFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -39,4 +47,9 @@
         tools:layout="@layout/fragment_profile">
 
     </fragment>
+    <fragment
+        android:id="@+id/attendeeItemShowFragment"
+        android:name="com.example.attendee.AttendeeItemShowFragment"
+        android:label="出席管理表"
+        tools:layout="@layout/fragment_attendee_item_show" />
 </navigation>
