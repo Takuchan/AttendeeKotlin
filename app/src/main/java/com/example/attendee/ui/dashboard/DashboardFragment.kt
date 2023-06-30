@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.attendee.AttendeeApplication
 import com.example.attendee.AttendeeListAdapter
 import com.example.attendee.CreateNewAttendeeDialogFragment
@@ -53,11 +55,63 @@ class DashboardFragment : Fragment() {
             attendeeViewModel.insert(profileEntity)
         }
 
+
         binding.recylcerView.adapter = adapter
         binding.recylcerView.layoutManager = LinearLayoutManager(context)
         attendeeViewModel.allAttendee.observe(viewLifecycleOwner,Observer { attendee ->
             attendee.let { adapter.submitList(it) }
         })
+
+        val helper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+            // どのような動きを許可するか
+            // ViewHolder ごとに分ける等の場合はここで制御す
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int {
+                return makeMovementFlags(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
+            }
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            // スワイプされた場合
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                // 項目を消去
+                viewHolder.itemId
+                adapter.notifyDataSetChanged()
+            }
+
+            // 選択状態が変化した時に呼ばれる
+            // 選択が解除された場合 viewHolder は null になるので #clearView で操作する
+            override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+                super.onSelectedChanged(viewHolder, actionState)
+                // e.g. 半透明にする
+                when (actionState) {
+                    ItemTouchHelper.ACTION_STATE_DRAG, ItemTouchHelper.ACTION_STATE_SWIPE -> {
+                        (viewHolder as? AttendeeListAdapter.WordViewHolder)?.let {
+                            it.itemView.alpha = 0.5f
+                        }
+                    }
+                }
+            }
+
+            // アニメーションが終了する時に呼ばれる
+            override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+                super.clearView(recyclerView, viewHolder)
+                // e.g. 反透明にしていたのを元に戻す
+                (viewHolder as AttendeeListAdapter.WordViewHolder).itemView.alpha = 1.0f
+            }
+        })
+        helper.attachToRecyclerView(binding.recylcerView)
+
+
+
         return root
     }
 
