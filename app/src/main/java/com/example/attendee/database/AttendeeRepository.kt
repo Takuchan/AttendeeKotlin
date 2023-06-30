@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 
 class AttendeeRepository(private val attendeeDao: AttendeeDao) {
-    val allProfile: Flow<List<AttendeeEntity>> = attendeeDao.getAll()
-    val myProfile: LiveData<AttendeeEntity> = attendeeDao.getMyProfile()
+    val allAttendee: Flow<List<AttendeeEntity>> = attendeeDao.getAll()
 
     @Suppress
     @WorkerThread

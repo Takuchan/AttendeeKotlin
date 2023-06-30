@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(AttendeeEntity::class,ProfileEntity::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(AttendeeEntity::class,ProfileEntity::class), version = 2, exportSchema = false)
 abstract class AttendeeDatabase : RoomDatabase() {
     abstract fun userDao(): ProfileDao
     abstract fun attendeeDao(): AttendeeDao
