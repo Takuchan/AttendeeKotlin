@@ -3,6 +3,7 @@ package com.example.attendee.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
 
 @Entity
 data class AttendeeEntity(
@@ -11,5 +12,5 @@ data class AttendeeEntity(
     @ColumnInfo(name = "location") var location:String?,
     @ColumnInfo(name = "publicmemo") var publicmemo: String?,
     @ColumnInfo(name = "privatememo") var privatememo:String?,
-    @ColumnInfo(name="date") var date:String
+    @ColumnInfo(name="date") var date:String?
 )

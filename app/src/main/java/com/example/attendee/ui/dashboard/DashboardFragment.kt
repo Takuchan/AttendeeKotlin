@@ -50,9 +50,6 @@ class DashboardFragment : Fragment() {
         binding.createNewAttendeeSheet.setOnClickListener{
             val createattendeedialog = CreateNewAttendeeDialogFragment()
             createattendeedialog.show((requireActivity()).supportFragmentManager,"")
-            val profileEntity =
-                AttendeeEntity(0,"ahokusa","fahokusa","ahokussa","private","public")
-            attendeeViewModel.insert(profileEntity)
         }
 
 
