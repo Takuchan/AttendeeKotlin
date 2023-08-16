@@ -5,12 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.attendee.databinding.FragmentAttendeeItemShowBinding
 import com.example.attendee.databinding.FragmentProfileBinding
 
 
-class AttendeeItemShowFragment : Fragment() {
-
+class AttendeeItemShowFragment() : Fragment() {
+    private val args: AttendeeItemShowFragment by navArgs()
 
 
     private var _binding: FragmentAttendeeItemShowBinding? = null

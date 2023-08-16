@@ -1,18 +1,17 @@
 package com.example.attendee
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
+
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attendee.database.AttendeeEntity
-import com.example.attendee.ui.dashboard.DashboardFragment
+import com.example.attendee.ui.dashboard.DashboardFragmentDirections
 
 class AttendeeListAdapter : ListAdapter<AttendeeEntity, AttendeeListAdapter.WordViewHolder>(AttendeeComperator()) {
 
@@ -25,7 +24,9 @@ class AttendeeListAdapter : ListAdapter<AttendeeEntity, AttendeeListAdapter.Word
         val current = getItem(position)
         holder.bind(current.title,current.location,current.date)
         holder.itemView.setOnClickListener{
-            holder.itemView.findNavController().navigate(R.id.action_navigation_dashboard_to_attendeeItemShowFragment)
+            val databaseiD:Int = current.id
+            holder.itemView.findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToAttendeeItemShowFragment(databaseiD))
+//            holder.itemView.findNavController().navigate(R.id.action_navigation_dashboard_to_attendeeItemShowFragment)
         }
     }
 

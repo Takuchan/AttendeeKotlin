@@ -17,8 +17,8 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:launchSingleTop="false"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpToInclusive="false" />
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/navigation_home" />
     </fragment>
 
     <fragment
@@ -32,7 +32,9 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+
+        </action>
     </fragment>
 
     <fragment
@@ -51,5 +53,11 @@
         android:id="@+id/attendeeItemShowFragment"
         android:name="com.example.attendee.AttendeeItemShowFragment"
         android:label="出席管理表"
-        tools:layout="@layout/fragment_attendee_item_show" />
+        tools:layout="@layout/fragment_attendee_item_show" >
+
+        <argument
+            android:name="number"
+            app:argType="integer"
+            android:defaultValue="2" />
+    </fragment>
 </navigation>

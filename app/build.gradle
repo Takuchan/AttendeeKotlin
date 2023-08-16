@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -66,5 +67,4 @@ dependencies {
     implementation "androidx.camera:camera-extensions:${camerax_version}"
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-
 }
