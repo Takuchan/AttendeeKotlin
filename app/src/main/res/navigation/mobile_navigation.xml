@@ -17,8 +17,7 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:launchSingleTop="false"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@android:anim/slide_out_right"
-            app:popUpTo="@id/navigation_home" />
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -33,7 +32,6 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim">
-
         </action>
     </fragment>
 
@@ -56,8 +54,8 @@
         tools:layout="@layout/fragment_attendee_item_show" >
 
         <argument
-            android:name="number"
+            android:name="getID"
             app:argType="integer"
-            android:defaultValue="2" />
+            android:defaultValue="0" />
     </fragment>
 </navigation>

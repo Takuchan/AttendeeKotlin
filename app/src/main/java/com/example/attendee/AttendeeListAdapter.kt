@@ -1,6 +1,5 @@
 package com.example.attendee
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +24,7 @@ class AttendeeListAdapter : ListAdapter<AttendeeEntity, AttendeeListAdapter.Word
         holder.bind(current.title,current.location,current.date)
         holder.itemView.setOnClickListener{
             val databaseiD:Int = current.id
-            holder.itemView.findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToAttendeeItemShowFragment(databaseiD))
+            holder.itemView.findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToAttendeeItemShowFragment().setGetID(databaseiD))
 //            holder.itemView.findNavController().navigate(R.id.action_navigation_dashboard_to_attendeeItemShowFragment)
         }
     }

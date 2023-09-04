@@ -16,16 +16,11 @@ interface AttendeeDao {
     @Query("SELECT * FROM AttendeeEntity WHERE id = 1;")
     fun getMyProfile(): LiveData<AttendeeEntity>
 
-//    @Query("SELECT * FROM user WHERE uid IN (:userIds)")
-//    fun loadAllByIds(userIds: IntArray): List<ProfileEntity>
-//
-//    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
-//            "last_name LIKE :last LIMIT 1")
-//    fun findByName(first: String, last: String): ProfileEntity
+    @Query("SELECT * FROM AttendeeEntity WHERE :id")
+    fun loadAttendeeData(id: Int): LiveData<AttendeeEntity>
 
     @Update
     fun updateAll(profileEntity: AttendeeEntity)
-
 
     @Insert
     fun insertAll(profileEntity: AttendeeEntity)
