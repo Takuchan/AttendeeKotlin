@@ -21,10 +21,8 @@ class AttendeeViewModel(private val repository: AttendeeRepository): ViewModel()
             repository.insert(attendeeEntity)
         }
     }
-    fun updateMyProfile(attendeeEntity: AttendeeEntity) = viewModelScope.launch {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.updateProfile(attendeeEntity)
-        }
+    fun loadAttendee(id: Int): LiveData<AttendeeEntity> {
+        return repository.loadAttendee(id)
     }
 }
 class AttendeeViewFactory(private val repository: AttendeeRepository) : ViewModelProvider.Factory{

@@ -6,14 +6,14 @@ import kotlinx.coroutines.flow.Flow
 
 class AttendeeRepository(private val attendeeDao: AttendeeDao) {
     val allAttendee: Flow<List<AttendeeEntity>> = attendeeDao.getAll()
-
     @Suppress
     @WorkerThread
     suspend fun insert(profileEntity: AttendeeEntity){
         attendeeDao.insertAll(profileEntity)
     }
-    suspend fun updateProfile(profileEntity: AttendeeEntity){
-        attendeeDao.updateAll(profileEntity)
+
+    fun loadAttendee(id:Int): LiveData<AttendeeEntity>{
+        return attendeeDao.loadAttendeeData(id)
     }
 
 

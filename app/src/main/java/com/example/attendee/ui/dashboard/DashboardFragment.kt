@@ -32,8 +32,6 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private val attendeeViewModel: AttendeeViewModel by viewModels {
@@ -46,12 +44,12 @@ class DashboardFragment : Fragment() {
     ): View {
         val adapter = AttendeeListAdapter()
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+
         val root: View = binding.root
         binding.createNewAttendeeSheet.setOnClickListener{
             val createattendeedialog = CreateNewAttendeeDialogFragment()
             createattendeedialog.show((requireActivity()).supportFragmentManager,"")
         }
-
 
         binding.recylcerView.adapter = adapter
         binding.recylcerView.layoutManager = LinearLayoutManager(context)
@@ -84,8 +82,6 @@ class DashboardFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             }
 
-            // 選択状態が変化した時に呼ばれる
-            // 選択が解除された場合 viewHolder は null になるので #clearView で操作する
             override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
                 super.onSelectedChanged(viewHolder, actionState)
                 // e.g. 半透明にする

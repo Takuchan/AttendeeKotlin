@@ -52,10 +52,7 @@
         android:name="com.example.attendee.AttendeeItemShowFragment"
         android:label="出席管理表"
         tools:layout="@layout/fragment_attendee_item_show" >
-
-        <argument
-            android:name="getID"
-            app:argType="integer"
-            android:defaultValue="0" />
+        <argument android:name="getAttendee"
+            app:argType="integer" />
     </fragment>
 </navigation>
