@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attendee.database.AttendeeEntity
 import com.example.attendee.ui.dashboard.DashboardFragmentDirections
+import com.example.attendee.ui.home.HomeFragmentDirections
 
 class AttendeeListAdapter : ListAdapter<AttendeeEntity, AttendeeListAdapter.WordViewHolder>(AttendeeComperator()) {
 
@@ -27,6 +28,7 @@ class AttendeeListAdapter : ListAdapter<AttendeeEntity, AttendeeListAdapter.Word
         holder.itemView.setOnClickListener{
             val databaseiD:Int = current.id
             holder.itemView.findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToAttendeeItemShowFragment(databaseiD))
+
         }
     }
 

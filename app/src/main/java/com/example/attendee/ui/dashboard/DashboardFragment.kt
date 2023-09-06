@@ -1,6 +1,7 @@
 package com.example.attendee.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,6 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,16 +31,14 @@ import com.example.attendee.viewmodel.AttendeeViewFactory
 import com.example.attendee.viewmodel.AttendeeViewModel
 import com.example.attendee.viewmodel.ProfileViewModel
 import com.example.attendee.viewmodel.ProfileViewModelFactory
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
     private val binding get() = _binding!!
-
-    private val attendeeViewModel: AttendeeViewModel by viewModels {
-        AttendeeViewFactory((requireActivity().applicationContext as AttendeeApplication).attendeeRepository)
-    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,64 +48,37 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
-        binding.createNewAttendeeSheet.setOnClickListener{
-            val createattendeedialog = CreateNewAttendeeDialogFragment()
-            createattendeedialog.show((requireActivity()).supportFragmentManager,"")
-        }
 
-        binding.recylcerView.adapter = adapter
-        binding.recylcerView.layoutManager = LinearLayoutManager(context)
-        attendeeViewModel.allAttendee.observe(viewLifecycleOwner,Observer { attendee ->
-            attendee.let { adapter.submitList(it) }
-        })
-
-        val helper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
-            // どのような動きを許可するか
-            // ViewHolder ごとに分ける等の場合はここで制御す
-            override fun getMovementFlags(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder
-            ): Int {
-                return makeMovementFlags(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
-            }
-
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                TODO("Not yet implemented")
-            }
-
-            // スワイプされた場合
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                // 項目を消去
-                viewHolder.itemId
-                adapter.notifyDataSetChanged()
-            }
-
-            override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-                super.onSelectedChanged(viewHolder, actionState)
-                // e.g. 半透明にする
-                when (actionState) {
-                    ItemTouchHelper.ACTION_STATE_DRAG, ItemTouchHelper.ACTION_STATE_SWIPE -> {
-                        (viewHolder as? AttendeeListAdapter.WordViewHolder)?.let {
-                            it.itemView.alpha = 0.5f
-                        }
-                    }
+        binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                Log.d("tablayout", tab.position.toString())
+                if (tab.position == 0){
+                    val fragment = CreatedAttendeeFragment()
+                    val transaction = childFragmentManager.beginTransaction()
+                    transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    transaction.replace(R.id.fragmentContainerView,fragment)
+                    transaction.commit()
+//                    findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToCreatedAttendeeFragment())
+                }else if(tab.position == 1){
+                    val fragment = JoinedAttendeeFragment()
+                    val transaction = childFragmentManager.beginTransaction()
+                    transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    transaction.replace(R.id.fragmentContainerView,fragment)
+                    transaction.commit()
+//                    findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToJoinedAttendeeFragment())
                 }
             }
 
-            // アニメーションが終了する時に呼ばれる
-            override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-                super.clearView(recyclerView, viewHolder)
-                // e.g. 反透明にしていたのを元に戻す
-                (viewHolder as AttendeeListAdapter.WordViewHolder).itemView.alpha = 1.0f
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+//                Log.d("tablayout", tab?.position.toString())
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+//                Log.d("tablayout", tab?.position.toString())
+
             }
         })
-        helper.attachToRecyclerView(binding.recylcerView)
-
-
 
         return root
     }

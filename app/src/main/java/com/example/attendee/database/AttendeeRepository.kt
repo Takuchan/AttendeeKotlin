@@ -15,6 +15,4 @@ class AttendeeRepository(private val attendeeDao: AttendeeDao) {
     fun loadAttendee(id:Int): LiveData<AttendeeEntity>{
         return attendeeDao.loadAttendeeData(id)
     }
-
-
 }

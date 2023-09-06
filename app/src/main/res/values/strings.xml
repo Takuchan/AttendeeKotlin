@@ -38,4 +38,7 @@
     <string name="privatememo_text">🔓自分用メモ</string>
     <string name="publicmemo_text">🌎パブリックメモ</string>
     <string name="location_text">場所</string>
+    <string name="dashboard_joinAttendee">参加済</string>
+    <string name="dashboard_createAttendee">作成済</string>
+
 </resources>
