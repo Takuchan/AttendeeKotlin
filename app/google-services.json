@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "811278820762",
+    "firebase_url": "https://attendantmanagement-c93a7-default-rtdb.firebaseio.com",
+    "project_id": "attendantmanagement-c93a7",
+    "storage_bucket": "attendantmanagement-c93a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811278820762:android:190a554061939488618623",
+        "android_client_info": {
+          "package_name": "com.takuchan.attendee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811278820762-5cq1tuu3jhua5jbv1duafg2be97gm0lf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKREN5BJdLoR9R3jLhggRD9NPUpLAKHTQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811278820762-5cq1tuu3jhua5jbv1duafg2be97gm0lf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "811278820762-6ojsd80h6j15r994nobu3quuchf1tq7e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.takuhan.attendee"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

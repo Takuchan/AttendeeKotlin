@@ -1,23 +1,27 @@
 package com.takuchan.attendee
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import androidx.fragment.app.DialogFragment
+import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.viewModels
 import com.takuchan.attendee.database.AttendeeEntity
 import com.takuchan.attendee.databinding.FragmentCreateNewAttendeeDialogBinding
-import com.takuchan.attendee.databinding.FragmentDashboardBinding
 import com.takuchan.attendee.viewmodel.AttendeeViewFactory
 import com.takuchan.attendee.viewmodel.AttendeeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.Date
+import java.util.prefs.Preferences
+
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+val ACCOUNT_SETTING = stringPreferencesKey("example_text")
 
 class CreateNewAttendeeDialogFragment : BottomSheetDialogFragment(), ValidationTools {
 
@@ -39,13 +43,13 @@ class CreateNewAttendeeDialogFragment : BottomSheetDialogFragment(), ValidationT
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentCreateNewAttendeeDialogBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.button6.setOnClickListener{
             if (isEmptyEditText(binding.textinput1)){
-
+                Toast.makeText(requireContext(),"タイトルを入力してください",Toast.LENGTH_SHORT).show()
             }else{
                 val title: String = changeEditTextToString(binding.textinput1)
                 val location:String = changeEditTextToString(binding.textinput2)
@@ -86,5 +90,9 @@ class CreateNewAttendeeDialogFragment : BottomSheetDialogFragment(), ValidationT
         return editText!!.text.toString().ifEmpty {
             ""
         }
+    }
+
+    suspend fun saveUID2DataStore(context: Context, text: String){
+        context.dataStore.updateData {  }
     }
 }
