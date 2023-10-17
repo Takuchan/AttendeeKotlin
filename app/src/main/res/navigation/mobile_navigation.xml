@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.example.attendee.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_profileFragment2"
             app:destination="@id/profileFragment2"
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.attendee.ui.dashboard.DashboardFragment"
+        android:name="com.takuchan.attendee.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" >
         <action
@@ -32,19 +32,19 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.attendee.ui.notifications.NotificationsFragment"
+        android:name="com.takuchan.attendee.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/profileFragment2"
-        android:name="com.example.attendee.ProfileFragment"
+        android:name="com.takuchan.attendee.ProfileFragment"
         android:label="プロフィール編集"
         tools:layout="@layout/fragment_profile">
 
     </fragment>
     <fragment
         android:id="@+id/attendeeItemShowFragment"
-        android:name="com.example.attendee.AttendeeItemShowFragment"
+        android:name="com.takuchan.attendee.AttendeeItemShowFragment"
         android:label="出席管理表"
         tools:layout="@layout/fragment_attendee_item_show" >
         <argument android:name="getAttendee"
